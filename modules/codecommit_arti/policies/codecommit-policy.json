@@ -1,0 +1,39 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "codecommit:BatchGet*",
+        "codecommit:Get*",
+        "codecommit:List*",
+        "codecommit:Create*",
+        "codecommit:Describe*",
+        "codecommit:Put*",
+        "codecommit:Post*",
+        "codecommit:Merge*",
+        "codecommit:Test*",
+        "codecommit:Update*",
+        "codecommit:GitPull",
+        "codecommit:GitPush"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "SpecificPermissionForDev",
+      "Effect": "Allow",
+      "Action": [
+        "codecommit:GitPush",
+        "codecommit:DeleteBranch",
+        "codecommit:PutFile",
+        "codecommit:Merge*"
+      ],
+      "Resource": "${RESOURCES}",
+      "Condition": {
+        "StringNotEquals": {
+          "codecommit:References": ["refs/heads/main", "refs/heads/master"]
+        }
+      }
+    }
+  ]
+}

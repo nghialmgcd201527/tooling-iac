@@ -1,0 +1,51 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowPull",
+      "Effect": "Allow",
+      "Action": [
+        "codecommit:Update*",
+        "codecommit:Merge*",
+        "codecommit:Post*",
+        "codecommit:Get*",
+        "codecommit:Test*",
+        "codecommit:BatchGet*",
+        "codecommit:GitPull",
+        "codecommit:Create*",
+        "codecommit:List*",
+        "codecommit:Describe*",
+        "codecommit:Put*",
+        "codecommit:GitPush",
+        "codecommit:DeleteBranch",
+        "codecommit:EvaluatePullRequestApprovalRules"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyPush",
+      "Effect": "Deny",
+      "Action": [
+        "codecommit:PutFile",
+        "codecommit:GitPush",
+        "codecommit:DeleteBranch"
+      ],
+      "Resource": "arn:aws:codecommit:ap-southeast-1:${account_id}:*",
+      "Condition": {
+        "StringEqualsIfExists": {
+          "codecommit:References": [
+            "refs/heads/main",
+            "refs/heads/master",
+            "refs/heads/uat",
+            "refs/heads/develop",
+            "refs/heads/qa",
+            "refs/heads/test"
+          ]
+        },
+        "Null": {
+          "codecommit:References": "false"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "GeneralPermissionsDevOps",
+      "Effect": "Allow",
+      "Action": ["codecommit:GitPull", "codecommit:Get*", "codecommit:List*"],
+      "Resource": "arn:aws:codecommit:ap-southeast-1:${account_id}:*"
+    },
+    {
+      "Sid": "SpecificPermissionForDevOps",
+      "Effect": "Allow",
+      "Action": [
+        "codecommit:BatchGet*",
+        "codecommit:BatchDescribe*",
+        "codecommit:Create*",
+        "codecommit:DeleteFile",
+        "codecommit:Describe*",
+        "codecommit:List*",
+        "codecommit:Merge*",
+        "codecommit:OverridePullRequestApprovalRules",
+        "codecommit:Put*",
+        "codecommit:Post*",
+        "codecommit:TagResource",
+        "codecommit:Test*",
+        "codecommit:UntagResource",
+        "codecommit:Update*",
+        "codecommit:GitPush"
+      ],
+      "Resource": "arn:aws:codecommit:ap-southeast-1:${account_id}:*",
+      "Condition": {
+        "StringNotEquals": {
+          "codecommit:References": ["refs/heads/main", "refs/heads/master"]
+        }
+      }
+    }
+  ]
+}

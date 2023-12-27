@@ -1,0 +1,16 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowDevelopertoaccessDBviaSSM",
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:iam::${application_account_id}:role/Application-Dev-Role",
+        "arn:aws:iam::${application_account_id}:role/ssm-cross-account",
+        "arn:aws:iam::${application_account_id_qa}:role/Application-qa-Role",
+        "arn:aws:iam::${application_account_id_qa}:role/ssm-cross-account-qa"
+      ],
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}

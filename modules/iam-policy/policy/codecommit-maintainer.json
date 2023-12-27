@@ -1,0 +1,45 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "MainPermission",
+      "Effect": "Allow",
+      "Action": [
+        "codecommit:Merge*",
+        "codecommit:TagResource",
+        "codecommit:BatchAssociateApprovalRuleTemplateWithRepositories",
+        "codecommit:BatchGet*",
+        "codecommit:GitPull",
+        "codecommit:UntagResource",
+        "codecommit:BatchDisassociateApprovalRuleTemplateFromRepositories",
+        "codecommit:OverridePullRequestApprovalRules",
+        "codecommit:Post*",
+        "codecommit:EvaluatePullRequestApprovalRules",
+        "codecommit:Test*",
+        "codecommit:DisassociateApprovalRuleTemplateFromRepository",
+        "codecommit:Describe*",
+        "codecommit:Put*",
+        "codecommit:GitPush",
+        "codecommit:DeleteFile",
+        "codecommit:BatchDescribe*",
+        "codecommit:AssociateApprovalRuleTemplateWithRepository",
+        "codecommit:Update*",
+        "codecommit:Get*",
+        "codecommit:Create*",
+        "codecommit:List*"
+      ],
+      "Resource": "arn:aws:codecommit:ap-southeast-1:${account_id}:*"
+    },
+    {
+      "Sid": "PreventDeleteBranch",
+      "Effect": "Allow",
+      "Action": "codecommit:DeleteBranch",
+      "Resource": "arn:aws:codecommit:ap-southeast-1:${account_id}:*",
+      "Condition": {
+        "StringNotEquals": {
+          "codecommit:References": ["refs/heads/main", "refs/heads/master"]
+        }
+      }
+    }
+  ]
+}

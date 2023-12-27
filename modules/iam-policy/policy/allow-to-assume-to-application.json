@@ -1,0 +1,14 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowCodeBuildToAccessApplication",
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:iam::${application_account_id}:role/Cross-Account-Code-Build-Role",
+        "arn:aws:iam::${application_account_id_qa}:role/Cross-Account-Code-Build-Role"
+      ],
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
